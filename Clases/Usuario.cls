@@ -10,7 +10,7 @@ Usuario comment: ''!
 !Usuario categoriesForClass!Kernel-Objects! !
 !Usuario methodsFor!
 
-initEmpleadodni: unDni nombre: unNom apellido: unApe nroUsuario: unUsu email: unEma telefono: unTel
+initUsuariodni: unDni nombre: unNom apellido: unApe nroUsuario: unUsu email: unEma telefono: unTel
     super initPersonadni: unDni nom: unNom apellido: unApe.
     NroUsuario := unUsu.
     Email := unEma.
@@ -32,7 +32,7 @@ verNroUsuario
 verTelefono
 ^Telefono.
 ! !
-!Usuario categoriesFor: #initEmpleadodni:nombre:apellido:nroUsuario:email:telefono:!public! !
+!Usuario categoriesFor: #initUsuariodni:nombre:apellido:nroUsuario:email:telefono:!public! !
 !Usuario categoriesFor: #ModificarEmail:!public! !
 !Usuario categoriesFor: #ModificarTelefono:!public! !
 !Usuario categoriesFor: #verEmail!public! !
@@ -42,6 +42,6 @@ verTelefono
 !Usuario class methodsFor!
 
 crearUsuariodni: unDni nombre: unNom apellido: unApe NroUsuario: unUsu Email: unEma Telefono: unTel
-^(self new) initEmpleadodni: unDni nombre: unNom apellido: unApe nroUsuario: unUsu email: unEma telefono: unTel! !
+^(self new) initUsuariodni: unDni nombre: unNom apellido: unApe nroUsuario: unUsu email: unEma telefono: unTel.! !
 !Usuario class categoriesFor: #crearUsuariodni:nombre:apellido:NroUsuario:Email:Telefono:!public! !
 
