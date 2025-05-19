@@ -79,6 +79,6 @@ verUsuario
 !Reserva class methodsFor!
 
 crearReservaId:unId fecha:unaFecha horaInicio:unaHoraInicio horaFin:unaHoraFin usuario:unUsuario cancha:unaCancha
-(self new) initReservaId: unId fecha: unaFecha horaInicio: unaHoraInicio horaFin: unaHoraFin usuario: unUsuario cancha: unaCancha.! !
+^(self new) initReservaId: unId fecha: unaFecha horaInicio: unaHoraInicio horaFin: unaHoraFin usuario: unUsuario cancha: unaCancha.! !
 !Reserva class categoriesFor: #crearReservaId:fecha:horaInicio:horaFin:usuario:cancha:!public! !
 
