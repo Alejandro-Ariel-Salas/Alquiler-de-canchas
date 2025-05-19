@@ -32,7 +32,7 @@ buscarReserva:idReserva
 ^reservas detect: [:reserva | reserva verId = idReserva ] ifNone: [nil].!
 
 buscarUsuario:idUsuario
-^usuarios detect: [:usuario | usuario verId = idUsuario ] ifNone: [nil].!
+^usuarios detect: [:usuario | usuario verNroUsuario = idUsuario ] ifNone: [nil].!
 
 cantidadCanchas
 ^canchas size.!
@@ -69,6 +69,11 @@ nombre:=unNom.!
 modiTel:unTel
 telefono:=unTel.!
 
+reservasDia: unaFecha
+|reservas|
+reservas := self verTodasLasReservas.
+^reservas select: [:reserva | reserva verFecha = unaFecha ].!
+
 verDir
 ^direccion.!
 
@@ -77,6 +82,12 @@ verEmail
 
 verNom
 ^nombre.!
+
+verReservasActivas: unaFecha
+|r|
+r := self verTodasLasReservas.
+^r select: [:reserva | (reserva verFecha = unaFecha) and: [reserva verEstadoReserva] ].
+!
 
 verTel
 ^telefono.!
@@ -109,9 +120,11 @@ verTodosLosUsuarios
 !Club categoriesFor: #modiEmail:!public! !
 !Club categoriesFor: #modiNom:!public! !
 !Club categoriesFor: #modiTel:!public! !
+!Club categoriesFor: #reservasDia:!public! !
 !Club categoriesFor: #verDir!public! !
 !Club categoriesFor: #verEmail!public! !
 !Club categoriesFor: #verNom!public! !
+!Club categoriesFor: #verReservasActivas:!public! !
 !Club categoriesFor: #verTel!public! !
 !Club categoriesFor: #verTodasLasCanchas!public! !
 !Club categoriesFor: #verTodasLasReservas!public! !
