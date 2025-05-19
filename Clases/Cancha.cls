@@ -16,6 +16,9 @@ disponibilidades add: unaDisp.!
 buscarDisponibilidad:idDisponibilidad
 ^ disponibilidades detect: [:disponibilidad | disponibilidad verId = idDisponibilidad ] ifNone: [nil].!
 
+buscarDisponibilidadDia:unDia
+^ disponibilidades detect: [:disponibilidad | disponibilidad verDia = unDia ] ifNone: [nil].!
+
 cantidadDisponibilidades
 ^disponibilidades size.!
 
@@ -36,6 +39,9 @@ tamanio :=unTam.!
 modiTipo:unTipo
 tipo :=unTipo.!
 
+tieneDia:unDia
+^self verTodasLasDisponibilidades detect: [:disp | disp verDia = unDia] ifNone: [nil].!
+
 verId
 ^id.!
 
@@ -52,11 +58,13 @@ verTodasLasDisponibilidades
 ^disponibilidades.! !
 !Cancha categoriesFor: #agregarDisponibilidad:!public! !
 !Cancha categoriesFor: #buscarDisponibilidad:!public! !
+!Cancha categoriesFor: #buscarDisponibilidadDia:!public! !
 !Cancha categoriesFor: #cantidadDisponibilidades!public! !
 !Cancha categoriesFor: #initCanchaid:nom:tam:tip:!public! !
 !Cancha categoriesFor: #modiNomb:!public! !
 !Cancha categoriesFor: #modiTam:!public! !
 !Cancha categoriesFor: #modiTipo:!public! !
+!Cancha categoriesFor: #tieneDia:!public! !
 !Cancha categoriesFor: #verId!public! !
 !Cancha categoriesFor: #verNomb!public! !
 !Cancha categoriesFor: #verTam!public! !
