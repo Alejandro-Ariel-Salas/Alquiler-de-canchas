@@ -10,6 +10,12 @@ Usuario comment: ''!
 !Usuario categoriesForClass!Kernel-Objects! !
 !Usuario methodsFor!
 
+initEmpleadodni: unDni nombre: unNom apellido: unApe nroUsuario: unUsu email: unEma telefono: unTel
+    super initPersonadni: unDni nom: unNom apellido: unApe.
+    NroUsuario := unUsu.
+    Email := unEma.
+    Telefono := unTel.!
+
 initUsuariodni: unDni nombre: unNom apellido: unApe nroUsuario: unUsu email: unEma telefono: unTel
     super initPersonadni: unDni nom: unNom apellido: unApe.
     NroUsuario := unUsu.
@@ -22,6 +28,10 @@ Telefono := unema.!
 ModificarTelefono: untel
 Telefono := untel.!
 
+printString
+    ^ nombre, ' ', apellido
+!
+
 verEmail
 ^Email.
 !
@@ -32,9 +42,11 @@ verNroUsuario
 verTelefono
 ^Telefono.
 ! !
+!Usuario categoriesFor: #initEmpleadodni:nombre:apellido:nroUsuario:email:telefono:!public! !
 !Usuario categoriesFor: #initUsuariodni:nombre:apellido:nroUsuario:email:telefono:!public! !
 !Usuario categoriesFor: #ModificarEmail:!public! !
 !Usuario categoriesFor: #ModificarTelefono:!public! !
+!Usuario categoriesFor: #printString!public! !
 !Usuario categoriesFor: #verEmail!public! !
 !Usuario categoriesFor: #verNroUsuario!public! !
 !Usuario categoriesFor: #verTelefono!public! !

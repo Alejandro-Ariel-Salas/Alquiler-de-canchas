@@ -42,8 +42,15 @@ tipo :=unTipo.!
 tieneDia:unDia
 ^self verTodasLasDisponibilidades detect: [:disp | disp verDia = unDia] ifNone: [nil].!
 
+tieneDiaBool: unDia
+    ^ (self verTodasLasDisponibilidades anySatisfy: [:disp | disp verDia = unDia]).
+!
+
 verId
 ^id.!
+
+verMargenHorasDia: unDia
+^((self tieneDia: unDia) verHoraCi)  - ((self tieneDia: unDia) verHoraAp).!
 
 verNomb
 ^nombre.!
@@ -65,7 +72,9 @@ verTodasLasDisponibilidades
 !Cancha categoriesFor: #modiTam:!public! !
 !Cancha categoriesFor: #modiTipo:!public! !
 !Cancha categoriesFor: #tieneDia:!public! !
+!Cancha categoriesFor: #tieneDiaBool:!public! !
 !Cancha categoriesFor: #verId!public! !
+!Cancha categoriesFor: #verMargenHorasDia:!public! !
 !Cancha categoriesFor: #verNomb!public! !
 !Cancha categoriesFor: #verTam!public! !
 !Cancha categoriesFor: #verTip!public! !

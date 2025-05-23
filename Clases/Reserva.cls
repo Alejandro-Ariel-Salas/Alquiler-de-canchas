@@ -40,6 +40,14 @@ id:=unId.!
 modiUsuario:unUsuario
 usuario:=unUsuario.!
 
+printReserva
+    ^ 'Reserva - Fecha: ', fecha printString,
+      ' | Cancha de futbol  ', (cancha verTam) printString, ' de ', (cancha verTip verTip ) printString,
+      ' | Cliente: ', usuario printString,
+      ' | Horario: ', horaInicio, ' a ', horaFin
+
+!
+
 verCancha
 ^cancha.!
 
@@ -68,6 +76,7 @@ verUsuario
 !Reserva categoriesFor: #modihoraInicio:!public! !
 !Reserva categoriesFor: #modiId:!public! !
 !Reserva categoriesFor: #modiUsuario:!public! !
+!Reserva categoriesFor: #printReserva!public! !
 !Reserva categoriesFor: #verCancha!public! !
 !Reserva categoriesFor: #verEstadoReserva!public! !
 !Reserva categoriesFor: #verFecha!public! !
