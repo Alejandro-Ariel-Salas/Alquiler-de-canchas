@@ -1,4 +1,4 @@
-| club dia reservasTot reservasPorDia u1 c1 r1 fechaReserva mes anio fechaElegida tipo|
+| club dia reservasTot u1 c1 r1 fechaReserva mes anio fechaElegida tipo|
 
 club := Club crearClubnom: 'Pelota libre' dir: 'Av. Calchaquí 6200' tel: '11 1234-5678' email: 'pelotalibre@gmail.com'.
 
@@ -18,17 +18,14 @@ mes := (Prompter prompt: 'Ingrese el mes de la reserva:') asNumber .
 anio := (Prompter prompt: 'Ingrese el año de la reserva:') asNumber .
 
 fechaElegida := Date newDay: dia monthNumber: mes year: anio.
+reservasTot := club reservasDia: fechaElegida.
 
+Transcript clear.
+Transcript show: '-------------------------------------------------------------- '; cr.
+Transcript show: 'Reservas para el día ', fechaElegida printString; cr.
+Transcript show: '-------------------------------------------------------------- '; cr.
 
-reservasTot := club verTodasLasReservas.
-
-reservasPorDia := reservasTot select: [:reserva | reserva verFecha = fechaElegida].
-
-Transcript show: '------------------------------------------------------- '; cr.
-Transcript show: '  Reservas para el día ', dia printString, ':'; cr.
-Transcript show: '------------------------------------------------------- '; cr.
-
-reservasPorDia isEmpty
+reservasTot isEmpty
     ifTrue: [Transcript show: 'No hay reservas para esa fecha.'; cr]
-    ifFalse: [reservasPorDia do: [:r | Transcript show: r printReserva ; cr]].
+    ifFalse: [reservasTot do: [:r | Transcript show: r printReserva ; cr]].
 

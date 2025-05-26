@@ -41,10 +41,15 @@ modiUsuario:unUsuario
 usuario:=unUsuario.!
 
 printReserva
-    ^ 'Reserva - Fecha: ', fecha printString,
-      ' | Cancha de futbol  ', (cancha verTam) printString, ' de ', (cancha verTip verTip ) printString,
-      ' | Cliente: ', usuario printString,
-      ' | Horario: ', horaInicio, ' a ', horaFin
+    ^ 'Horario: ', horaInicio, ' a ', horaFin, Character cr asString,
+      'Cliente: ', usuario printString, Character cr asString,
+      'Cancha de Fútbol ', (cancha verTam) printString, ' - ', cancha verTip verTip,Character cr asString,
+      '-------------------------------------------------------------- '
+
+
+
+      
+      
 
 !
 
