@@ -297,7 +297,7 @@ opValida:= false.
 
 Transcript show: '----------------------------------------------------'; cr.
 	Transcript show: 'Elija una opción:'; cr.
-	Transcript show: '(S) Para continuar la creación de empleados'; cr.
+	Transcript show: '(S) Para continuar la creación'; cr.
 	Transcript show: '(N) Para terminar la creación'; cr.
 	Transcript show: '----------------------------------------------------'; cr.
 
