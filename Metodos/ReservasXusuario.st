@@ -37,12 +37,8 @@ reservas := club verTodasLasReservas.
 usuarios := reservas collect: [:r | r verUsuario ].
 usuarios := usuarios asSet.  "Elimina duplicados"
 
-
-
 usuarios do: [:u | 
     reservasPorUsuario := reservas select: [:r | r verUsuario = u ].
     Transcript show: 'Usuario: ', u printString, ' - Cantidad de reservas: ', reservasPorUsuario size printString; cr.
 ].
 
-
-a Set(an Usuario an Usuario an Usuario)

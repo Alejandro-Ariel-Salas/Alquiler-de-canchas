@@ -1,4 +1,6 @@
-|club usuario opc cancha cesped sintetico sala disponibildad fecha reserva canchas diaSemana diasSemana hayDisponibilidad opValida listUsuarios horario reservas canchaFechaFlag reservaPorCancha opc3|
+|anio antiguedad apellido cancha canchaFechaFlag canchaSeleccionada canchas cesped club dia diaSemana diasSemana disponibilidad disponibildad dni empleado fecha fechaElegida fechaReserva finCrear finProceso hayDisponibilidad horaAp horaCi horario idABuscar idCancha listUsuarios mail mes nombre nroUsu opc opc2 opc3 opcValida opValida porCancha puesto reserva reservaPorCancha reservas reservasPorUsuario reservasTot sala salario sintetico telefono tipo usuario usuarios usuariosOrdenados|
+
+
 
 club := Club crearClubnom: 'Pelota libre' dir: 'Av. Calchaquí 6200' tel: '11 1234-5678' email: 'pelotalibre@gmail.com'.
 
@@ -75,7 +77,14 @@ cr.
 Transcript show: 'Opciones: '; cr;
 show: '1 - Crear reserva.'; cr;
 show: '2 - Crear cancha.'; cr;
-show: '3 - Agregar disponibilidad a una cancha.'; cr;
+show: '3 - Crear usuario.'; cr;
+show: '4 - Crear Empleado.'; cr;
+show: '5 - Cancelar reserva.'; cr;
+show: '6 - Agregar disponibilidad a una cancha.'; cr;
+show: '7 - Mostrar usuarios.'; cr;
+show: '8 - Mostrar reservas por día.'; cr;
+show: '9 - Mostrar cantidad de reservas por usuario.'; cr;
+show: '10 - Mostrar cantidad de reservas por cancha.'; cr;
 show: '0 - Salir del programa.'; cr;
 show: '----------------------------------------------------------------------------------------------------'; cr.
 
@@ -354,16 +363,313 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 			cancha := Cancha crearCanchaid: club cantidadCanchas nom: nomCancha tam: tam tip: tipo.
 			club agregarCancha: cancha.
 		].
+		"crear usuario"
+		(opc = 3) ifTrue: [
+			finCrear := false.
 
+			[finCrear not ] whileTrue: [
+				Transcript show: '----------------- Crear Usuario -----------------'; cr.
 
+				Transcript show: 'Escriba los siguientes datos del usuario:'; cr.
+				Transcript show: '>>>Nombre'; cr.
+				nombre := (Prompter prompt:'Ingrese su nombre:') asString.
 
-	
+				Transcript show: '>>>Apellido'; cr.
+				apellido := (Prompter prompt:'Ingrese su apellido:') asString.
+
+				Transcript show: '>>>DNI'; cr.
+				dni :=  (Prompter prompt:'Ingrese su DNI') asString .
+
+				Transcript show: '>>>Telefono'; cr.
+				telefono := (Prompter prompt:'Ingrese su Telefono:') asString.
+
+				Transcript show: '>>>Mail'; cr.
+				mail :=  (Prompter prompt:'Ingrese su Email:') asString.
+
+				Transcript show: '----------------------------------------------------'; cr.
+
+				nroUsu := club cantidadUsuarios + 1.
+				usuario := Usuario crearUsuariodni: dni nombre: nombre apellido: apellido 
+					NroUsuario: nroUsu Email: mail Telefono: telefono.
+				club agregarUsuario: usuario.
+
+				Transcript show: '----------------------------------------------------'; cr.
+				Transcript show: 'Elija una opcion:'; cr.
+				Transcript show: '(S) Para continuar la creación de usuarios'; cr.
+				Transcript show: '(N) Para terminar la creación'; cr.
+				Transcript show: '----------------------------------------------------'; cr.
+
+				opc :=  (Prompter prompt:'Ingrese aqui la opcion:') asString.
+				opc := opc asLowercase.
+
+				(opc = 's')
+				    ifTrue: [finCrear := false]
+				    ifFalse: [finCrear := true].
+			].
+		].
+		"crear empleado"
+		(opc = 4) ifTrue: [
+			finCrear := false.
+
+			[finCrear not ] whileTrue: [
+				Transcript show: '----------------- Crear Empleado -----------------'; cr.
+
+				Transcript show: 'Escriba los siguientes datos del empleado:'; cr.
+				Transcript show: '>>>Nombre'; cr.
+				nombre := (Prompter prompt:'Ingrese su nombre:') asString.
+
+				Transcript show: '>>>Apellido'; cr.
+				apellido := (Prompter prompt:'Ingrese su apellido:') asString.
+
+				Transcript show: '>>>DNI'; cr.
+				dni :=  (Prompter prompt:'Ingrese su DNI') asString.
+
+				Transcript show: '>>>Antigüedad'; cr.
+				antiguedad := (Prompter prompt:'Ingrese la antigüedad').
+				(antiguedad isAllDigits and: [antiguedad size > -1]) ifTrue: [ antiguedad := antiguedad asNumber .].
+
+				Transcript show: '>>>Puesto y Salario'; cr.
+				Transcript show: '	1 - Administrativo - 3500 $'; cr.
+				Transcript show: '	2 - Mantenimiento - 3200 $'; cr.
+				Transcript show: '	3 - Seguridad Nocturna - 3000 $'; cr.
+				Transcript show: '------------------------------------------------------'; cr.
+
+				opc := false.
+				
+				[opc not ] whileTrue: [
+					opc2 :=  (Prompter prompt:'Elija una opción (1-3):').
+					(opc2 isAllDigits and: [opc2 size > 0]) ifTrue: [ opc2 := opc2 asNumber .].
+
+					(opc2 = 1) ifTrue: [
+						puesto := 'Administrativo'.
+						salario := 3500.
+						opc := true.
+					] ifFalse: [
+						(opc2 = 2) ifTrue: [
+							puesto := 'Mantenimiento'.
+							salario := 3200.
+							opc := true.
+						] ifFalse: [
+							(opc2 = 3) ifTrue: [
+								puesto := 'Seguridad'.
+								salario := 3000.
+								opc := true.
+							].
+						].
+					].
+				].
+
+				empleado := Empleado crearEmpleadoDni: dni Nombre: nombre Apellido: apellido 
+					Salario: salario Antiguedad: antiguedad puesto: puesto.
+				club agregarEmpleado: empleado.
+
+				Transcript show: '----------------------------------------------------'; cr.
+				Transcript show: 'Elija una opción:'; cr.
+				Transcript show: '(S) Para continuar la creación de empleados'; cr.
+				Transcript show: '(N) Para terminar la creación'; cr.
+				Transcript show: '----------------------------------------------------'; cr.
+
+				opc3 :=  (Prompter prompt:'Ingrese aquí la opción:') asString.
+				opc3 := opc3 asLowercase.
+
+				(opc3 = 's')
+					ifTrue: [finCrear := false ]
+					ifFalse: [finCrear := true].
+			].
+		].
+		"cancelar reserva"
+		(opc = 5) ifTrue: [
+			opValida := false.
+
+			[opValida not] whileTrue: [
+				idABuscar := (Prompter prompt: 'Ingrese el ID de la reserva a cancelar') asNumber .
+				reserva := club buscarReserva: idABuscar.
+				(reserva notNil)ifTrue: [
+				opValida := true.
+				reserva modiEstadoReserva: false.
+				MessageBox notify: 'Reserva cancelada' caption: 'Exito'.
+				]
+				ifFalse:[
+				MessageBox warning: 'Reserva no encontrada' caption: 'ATENCION'.
+				].
+			].
+		].
+		"agregar disponibilidad"
+		(opc = 6) ifTrue: [
+			finProceso := false.
+			"---------- BUCLE PRINCIPAL ----------"
+			[finProceso not] whileTrue: [
+
+			    "---------- SELECCIONAR LA CANCHA A MODIFICAR ----------"
+			    Transcript show: '----------------------------------------------------'; cr.
+			    Transcript show: 'Seleccione la cancha a la que desea agregar disponibilidad:'; cr.
+			    club verTodasLasCanchas do: [ :c |
+				Transcript show: 'ID: ', c verId printString, ' - Nombre: ', c verNomb; cr.
+			    ].
+			    Transcript show: '----------------------------------------------------'; cr.
+
+			    opValida := false.
+			    canchaSeleccionada := nil.
+			    [opValida not] whileTrue: [
+				idCancha := Prompter prompt: 'Ingrese el ID de la cancha:'.
+				(idCancha isAllDigits and: [idCancha size > 0])
+				    ifTrue: [
+					canchaSeleccionada := club buscarCancha: idCancha asNumber.
+					canchaSeleccionada notNil
+					    ifTrue: [ opValida := true ]
+					    ifFalse: [ MessageBox warning: 'No se encontró una cancha con ese ID.' caption: 'Error'. ]
+				    ]
+				    ifFalse: [ MessageBox warning: 'Por favor, ingrese un ID numérico.' caption: 'Error'. ]
+			    ].
+
+			    " ---------- INGRESAR LOS DATOS DE LA NUEVA DISPONIBILIDAD ----------"
+			    diasSemana := #('Lunes' 'Martes' 'Miercoles' 'Jueves' 'Viernes' 'Sabado' 'Domingo').
+			    opcValida := false.
+			    [opcValida not] whileTrue: [
+				Transcript show: 'Seleccione el día de la semana:'; cr.
+				diasSemana doWithIndex: [:d :i | Transcript show: i printString, ' - ', d; cr].
+				opc := Prompter prompt: 'Ingrese el número del día:'.
+				(opc isAllDigits and: [opc size > 0])
+				    ifTrue: [
+					opc := opc asNumber.
+					(opc >= 1 and: [opc <= diasSemana size])
+					    ifTrue: [
+						dia := diasSemana at: opc.
+						(canchaSeleccionada tieneDia: dia)
+						    ifNil: [ opcValida := true ]
+						    ifNotNil: [ MessageBox warning: 'La cancha ya tiene disponibilidad para el día ', dia, '. No se puede agregar duplicados.' caption: 'Conflicto'. ]
+					    ]
+					    ifFalse: [ MessageBox warning: 'Opción inválida.' caption: 'Error'. ]
+				    ]
+				    ifFalse: [ MessageBox warning: 'Por favor, ingrese un número.' caption: 'Error'. ]
+			    ].
+			    opcValida := false.
+			    [opcValida not] whileTrue: [
+				horaAp := Prompter prompt: 'Ingrese la hora de apertura (formato 24hs)'.
+				(horaAp isAllDigits and: [horaAp size > 0])
+				    ifTrue: [
+					horaAp := horaAp asNumber.
+					(horaAp >= 0 and: [horaAp <= 23])
+					    ifTrue: [ opcValida := true ]
+					    ifFalse: [ MessageBox warning: 'La hora debe estar entre 0 y 23.' caption: 'Error'. ]
+				    ]
+				    ifFalse: [ MessageBox warning: 'Por favor, ingrese un número.' caption: 'Error'. ]
+			    ].
+			    opcValida := false.
+			    [opcValida not] whileTrue: [
+				horaCi := Prompter prompt: 'Ingrese la hora de cierre (formato 24hs)'.
+				(horaCi isAllDigits and: [horaCi size > 0])
+				    ifTrue: [
+					horaCi := horaCi asNumber.
+					(horaCi > horaAp and: [horaCi <= 24])
+					    ifTrue: [ opcValida := true ]
+					    ifFalse: [ MessageBox warning: 'La hora de cierre debe ser posterior a la de apertura (', horaAp printString, ') y menor o igual a 24.' caption: 'Error'. ]
+				    ]
+				    ifFalse: [ MessageBox warning: 'Por favor, ingrese un número.' caption: 'Error'. ]
+			    ].
+
+			    " ---------- CREACIÓN Y AGREGADO DEL OBJETO ----------"
+			    disponibilidad := Disponibilidad crearDisponibilidadid: (canchaSeleccionada verTodasLasDisponibilidades size + 1) horaAp: horaAp horaCi: horaCi dia: dia.
+			    canchaSeleccionada agregarDisponibilidad: disponibilidad.
+
+			    MessageBox notify: 'Disponibilidad para el día ', dia, ' agregada con éxito a la ', canchaSeleccionada verNomb caption: 'Éxito'.
+
+			    "5. ---------- PREGUNTAR SI CONTINUAR ----------"
+			    opc := Prompter prompt: '¿Desea agregar otra disponibilidad? (S/N)'.
+			    (opc asLowercase = 's')
+				ifFalse: [ finProceso := true ].
+			].
+		].
+		"mostrar usuarios"
+		(opc = 7) ifTrue: [	
+			"colección que se ordena sola."
+			usuariosOrdenados := SortedCollection new.
+			"criterio de ordenamiento: por apellido."
+			usuariosOrdenados sortBlock: [:a :b | a verApellido <= b verApellido].
+			"Agregamos todos los usuarios"
+			usuariosOrdenados addAll: (club verTodosLosUsuarios).
+
+			Transcript clear.
+
+			usuariosOrdenados do: [ :i |
+			    Transcript show: 'Dni: ', i verDni printString; cr.
+			    Transcript show: 'Nombre: ', i verNombre printString; cr.
+			    Transcript show: 'Apellido: ', i verApellido printString; cr.
+			    Transcript show: 'NroUsuario: ', i verNroUsuario printString; cr.
+			    Transcript show: 'Email: ', i verEmail printString; cr.
+			    Transcript show: 'Teléfono: ', i verTelefono printString; cr.
+			    Transcript show: '-----------------------------------'; cr; cr.
+			].
+			MessageBox notify: 'Haga click en aceptar para dejar de ver' caption: 'Datos impresos'.
+		].
+		"mostrar reservas por dia"
+		(opc = 8) ifTrue: [						
+			dia := (Prompter prompt: 'Ingrese el día de la reserva:') asNumber.
+			mes := (Prompter prompt: 'Ingrese el mes de la reserva:') asNumber .
+			anio := (Prompter prompt: 'Ingrese el año de la reserva:') asNumber .
+
+			fechaElegida := Date newDay: dia monthNumber: mes year: anio.
+			reservasTot := club reservasDia: fechaElegida.
+
+			Transcript clear.
+			Transcript show: '-------------------------------------------------------------- '; cr.
+			Transcript show: 'Reservas para el día ', fechaElegida printString; cr.
+			Transcript show: '-------------------------------------------------------------- '; cr.
+
+			reservasTot isEmpty
+			    ifTrue: [Transcript show: 'No hay reservas para esa fecha.'; cr]
+			    ifFalse: [reservasTot do: [:r | Transcript show: r printReserva ; cr]].
+			MessageBox notify: 'Haga click en aceptar para dejar de ver' caption: 'Datos impresos'.
+		].
+		"mostrar cantidad de reservas por usuario"
+		(opc = 9) ifTrue: [	
+			Transcript clear.
+			Transcript show: '-----------------------------------------'; cr.
+			Transcript show: ' Cantidad de reservas por usuario'; cr.
+			Transcript show: '-----------------------------------------'; cr.
+
+			reservas := club verTodasLasReservas.
+			usuarios := reservas collect: [:r | r verUsuario ].
+			usuarios := usuarios asSet.  "Elimina duplicados"
+
+			usuarios do: [:u | 
+			    reservasPorUsuario := reservas select: [:r | r verUsuario = u ].
+			    Transcript show: 'Usuario: ', u printString, ' - Cantidad de reservas: ', reservasPorUsuario size printString; cr.
+			].
+			MessageBox notify: 'Haga click en aceptar para dejar de ver' caption: 'Datos impresos'.
+		].
+		"mostrar cantidad de reservas por cancha"
+		(opc = 10) ifTrue: [
+			canchas := club verTodasLasCanchas.
+			reservas := club verTodasLasReservas.
+
+			Transcript show: 'Cantidad de reservas por cancha:'; cr.
+			Transcript show: '---------------------------------'; cr.
+
+			canchas do: [:c |
+			    cantidad := 0.
+			    reservas do: [:r |
+				(r verCancha = c) ifTrue: [cantidad := cantidad + 1].
+			    ].
+			    Transcript show: 'Cancha ', c verId printString, ' (', c verNomb, '): ', cantidad printString, ' reservas.'; cr.
+			].
+
+			Transcript show: '---------------------------------'; cr.
+			MessageBox notify: 'Haga click en aceptar para dejar de ver' caption: 'Datos impresos'.
+		].
 
 	Transcript clear.
 	Transcript show: 'Opciones: '; cr;
 	show: '1 - Crear reserva.'; cr;
 	show: '2 - Crear cancha.'; cr;
-	show: '3 - Agregar disponibilidad a una cancha.'; cr;
+	show: '3 - Crear usuario.'; cr;
+	show: '4 - Crear Empleado.'; cr;
+	show: '5 - Cancelar reserva.'; cr;
+	show: '6 - Agregar disponibilidad a una cancha.'; cr;
+	show: '7 - Mostrar usuarios.'; cr;
+	show: '8 - Mostrar reservas por día.'; cr;
+	show: '9 - Mostrar cantidad de reservas por usuario.'; cr;
+	show: '10 - Mostrar cantidad de reservas por cancha.'; cr;
 	show: '0 - Salir del programa.'; cr;
 	show: '----------------------------------------------------------------------------------------------------'; cr.
 	opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.

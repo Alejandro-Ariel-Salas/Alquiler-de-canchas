@@ -92,4 +92,4 @@ finProceso := false.
         ifFalse: [ finProceso := true ].
 ].
 
-club inspect. 
+club inspect.
