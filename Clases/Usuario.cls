@@ -29,7 +29,7 @@ ModificarTelefono: untel
 Telefono := untel.!
 
 printString
-    ^ nombre, ' ', apellido
+    ^ 'Usuario: ',nombre, ' ', apellido
 !
 
 verEmail

@@ -1,4 +1,4 @@
-|anio antiguedad apellido cancha canchaFechaFlag canchaSeleccionada canchas cesped club dia diaSemana diasSemana disponibilidad disponibildad dni empleado fecha fechaElegida fechaReserva finCrear finProceso hayDisponibilidad horaAp horaCi horario idABuscar idCancha listUsuarios mail mes nombre nroUsu opc opc2 opc3 opcValida opValida porCancha puesto reserva reservaPorCancha reservas reservasPorUsuario reservasTot sala salario sintetico telefono tipo usuario usuarios usuariosOrdenados|
+|anio antiguedad apellido cancha canchaFechaFlag canchaSeleccionada canchas cesped club dia diaSemana diasSemana disponibilidad disponibildad dni empleado fecha fechaElegida fechaReserva finCrear finProceso hayDisponibilidad horaAp horaCi horario idABuscar idCancha listUsuarios mail mes nombre nroUsu opc opc2 opc3 opcValida opValida porCancha puesto reserva reservaPorCancha reservas reservasPorUsuario reservasTot sala salario sintetico telefono tipo usuario usuario2 usuarios usuariosOrdenados|
 
 
 
@@ -38,32 +38,32 @@ cancha := Cancha crearCanchaid: 3 nom: 'Cancha 2' tam: 7 tip: cesped.
 club agregarCancha: cancha.
 
 "Crear usuarios"
-usuario := Usuario crearUsuariodni: 40000000 nombre: 'Ana' apellido: 'Lopez' NroUsuario: (club cantidadUsuarios + 1) Email: 'ana@mail.com' Telefono: 11111111.
-club agregarUsuario: usuario.
+usuario2 := Usuario crearUsuariodni: 40000000 nombre: 'Ana' apellido: 'Lopez' NroUsuario: (club cantidadUsuarios + 1) Email: 'ana@mail.com' Telefono: 11111111.
+club agregarUsuario: usuario2.
 
 usuario:= Usuario crearUsuariodni: 44444444 nombre: 'Juan' apellido: 'Martinez' NroUsuario: club cantidadUsuarios + 1  Email: 'jMartinez@mail.com' Telefono: 1151234111.
 club agregarUsuario: usuario.
 
 "Crear reservas"
 fecha := Date newDay: 19 monthNumber: 5 year: 2025.
-reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 8 horaFin: 9 usuario: usuario cancha: (club verTodasLasCanchas at: 1).
+reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 8 horaFin: 9 usuario: (usuario verNroUsuario) cancha: (club verTodasLasCanchas at: 1).
 club agregarReserva: reserva.
 fecha := Date newDay: 20 monthNumber: 5 year: 2025.
-reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 12 horaFin: 13 usuario: usuario cancha: (club verTodasLasCanchas at: 1).
+reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 12 horaFin: 13 usuario: (usuario verNroUsuario) cancha: (club verTodasLasCanchas at: 1).
 club agregarReserva: reserva.
 fecha := Date newDay: 20 monthNumber: 5 year: 2025.
-reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 12 horaFin: 13 usuario: usuario cancha: (club verTodasLasCanchas at: 2).
+reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 12 horaFin: 13 usuario: (usuario verNroUsuario) cancha: (club verTodasLasCanchas at: 2).
 club agregarReserva: reserva.
 
 fecha:= Date newDay: 3 monthNumber: 6 year: 2025.
-reserva:= Reserva crearReservaId: club cantidadReservas + 1 fecha: fecha horaInicio: 9 horaFin: 10 usuario: (usuario verNroUsuario) cancha: 1.
+reserva:= Reserva crearReservaId: club cantidadReservas + 1 fecha: fecha horaInicio: 9 horaFin: 10 usuario: (usuario verNroUsuario)  cancha: 1.
 club agregarReserva: reserva.
 
-reserva:= Reserva crearReservaId: club cantidadReservas + 1 fecha: fecha horaInicio: 10 horaFin: 11 usuario: (usuario verNroUsuario) cancha: 1.
+reserva:= Reserva crearReservaId: club cantidadReservas + 1 fecha: fecha horaInicio: 10 horaFin: 11 usuario: (usuario verNroUsuario)  cancha: 1.
 club agregarReserva: reserva.
 
 8 to: 18 do: [ :i | 
-reserva:= Reserva crearReservaId: club cantidadReservas + 1 fecha: fecha horaInicio: i horaFin: (i +1) usuario: (usuario verNroUsuario) cancha: 2.
+reserva:= Reserva crearReservaId: club cantidadReservas + 1 fecha: fecha horaInicio: i horaFin: (i +1) usuario: (usuario2 verNroUsuario ) cancha: 2.
 club agregarReserva: reserva.
 ].
 
@@ -371,10 +371,15 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 				Transcript show: '----------------- Crear Usuario -----------------'; cr.
 
 				Transcript show: 'Escriba los siguientes datos del usuario:'; cr.
+				Transcript show: '>>>Nombre'; cr.
 				nombre := (Prompter prompt:'Ingrese su nombre:') asString.
+				Transcript show: '>>>Apellido'; cr.
 				apellido := (Prompter prompt:'Ingrese su apellido:') asString.
+				Transcript show: '>>>DNI'; cr.
 				dni :=  (Prompter prompt:'Ingrese su DNI') asString .
+				Transcript show: '>>>Telefono'; cr.
 				telefono := (Prompter prompt:'Ingrese su Telefono:') asString.
+				Transcript show: '>>>Mail'; cr.
 				mail :=  (Prompter prompt:'Ingrese su Email:') asString.
 
 				Transcript show: '----------------------------------------------------'; cr.
@@ -395,9 +400,9 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 		].
 		"crear empleado"
 		(opc = 4) ifTrue: [
-			finCrear := false.
+			finCrear := true .
 
-			[finCrear not ] whileTrue: [
+			[finCrear ] whileTrue: [
 				Transcript show: '----------------- Crear Empleado -----------------'; cr.
 
 				Transcript show: 'Escriba los siguientes datos del empleado:'; cr.
@@ -440,7 +445,8 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 								puesto := 'Seguridad'.
 								salario := 3000.
 								opc := true.
-							].
+							]
+							ifFalse:[ MessageBox warning: 'ATENCION: Ingrese un numero.' caption: 'Error'.].
 						].
 					].
 				].
@@ -455,12 +461,7 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 				Transcript show: '(N) Para terminar la creación'; cr.
 				Transcript show: '----------------------------------------------------'; cr.
 
-				opc3 :=  (Prompter prompt:'Ingrese aquí la opción:') asString.
-				opc3 := opc3 asLowercase.
-
-				(opc3 = 's')
-					ifTrue: [finCrear := false ]
-					ifFalse: [finCrear := true].
+				finCrear := MessageBox confirm: 'Desea seguir agregando Empleados' caption: 'Crear Empleados'.
 			].
 		].
 		"cancelar reserva"
@@ -604,7 +605,7 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 
 			reservasTot isEmpty
 			    ifTrue: [Transcript show: 'No hay reservas para esa fecha.'; cr]
-			    ifFalse: [reservasTot do: [:r | Transcript show: r printReserva ; cr]].
+			    ifFalse: [reservasTot do: [:r | Transcript show: (r printReserva: (club buscarUsuario:(r verUsuario))) ; cr]].
 			MessageBox notify: 'Haga click en aceptar para dejar de ver' caption: 'Datos impresos'.
 		].
 		"mostrar cantidad de reservas por usuario"
@@ -615,12 +616,14 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 			Transcript show: '-----------------------------------------'; cr.
 
 			reservas := club verTodasLasReservas.
-			usuarios := reservas collect: [:r | r verUsuario ].
+
+			usuarios := reservas collect: [:r | club buscarUsuario: (r verUsuario) ].
 			usuarios := usuarios asSet.  "Elimina duplicados"
 
 			usuarios do: [:u | 
-			    reservasPorUsuario := reservas select: [:r | r verUsuario = u ].
-			    Transcript show: 'Usuario: ', u printString, ' - Cantidad de reservas: ', reservasPorUsuario size printString; cr.
+			reservasPorUsuario := reservas select: [:r | r verUsuario = u verNroUsuario ].
+			Transcript show: u printString, ' - Cantidad de reservas: ', reservasPorUsuario size printString; cr.
+
 			].
 			MessageBox notify: 'Haga click en aceptar para dejar de ver' caption: 'Datos impresos'.
 		].
@@ -661,3 +664,5 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 	opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 ].
 
+Transcript clear.
+club inspect.
