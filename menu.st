@@ -365,25 +365,16 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 		].
 		"crear usuario"
 		(opc = 3) ifTrue: [
-			finCrear := false.
+			finCrear := true.
 
-			[finCrear not ] whileTrue: [
+			[finCrear ] whileTrue: [
 				Transcript show: '----------------- Crear Usuario -----------------'; cr.
 
 				Transcript show: 'Escriba los siguientes datos del usuario:'; cr.
-				Transcript show: '>>>Nombre'; cr.
 				nombre := (Prompter prompt:'Ingrese su nombre:') asString.
-
-				Transcript show: '>>>Apellido'; cr.
 				apellido := (Prompter prompt:'Ingrese su apellido:') asString.
-
-				Transcript show: '>>>DNI'; cr.
 				dni :=  (Prompter prompt:'Ingrese su DNI') asString .
-
-				Transcript show: '>>>Telefono'; cr.
 				telefono := (Prompter prompt:'Ingrese su Telefono:') asString.
-
-				Transcript show: '>>>Mail'; cr.
 				mail :=  (Prompter prompt:'Ingrese su Email:') asString.
 
 				Transcript show: '----------------------------------------------------'; cr.
@@ -395,16 +386,11 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 
 				Transcript show: '----------------------------------------------------'; cr.
 				Transcript show: 'Elija una opcion:'; cr.
-				Transcript show: '(S) Para continuar la creación de usuarios'; cr.
-				Transcript show: '(N) Para terminar la creación'; cr.
+				Transcript show: '(Si) Para continuar la creación de usuarios'; cr.
+				Transcript show: '(No) Para terminar la creación'; cr.
 				Transcript show: '----------------------------------------------------'; cr.
 
-				opc :=  (Prompter prompt:'Ingrese aqui la opcion:') asString.
-				opc := opc asLowercase.
-
-				(opc = 's')
-				    ifTrue: [finCrear := false]
-				    ifFalse: [finCrear := true].
+				finCrear := MessageBox confirm: 'Desea seguir agregando usuarios' caption: 'Crear Usuarios'.
 			].
 		].
 		"crear empleado"
