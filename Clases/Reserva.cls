@@ -40,17 +40,14 @@ id:=unId.!
 modiUsuario:unUsuario
 usuario:=unUsuario.!
 
-printReserva: unUsu
+printReserva: unClub
+	|u c|
+	u := unClub buscarUsuario: usuario.
+	c := (unClub buscarCancha: cancha).
     ^ 'Horario: ', horaInicio printString , ' a ', horaFin printString , Character cr asString,
-      unUsu printString, Character cr asString,
-      'Cancha de Fútbol ', (cancha verTam) printString, ' - ', cancha verTip verTip,Character cr asString,
+      u  printString, Character cr asString,
+      'Cancha de Fútbol ',(c verTam) printString, ' - ', (c verTip) verTip ,Character cr asString,
       '-------------------------------------------------------------- '
-
-
-
-      
-      
-
 !
 
 verCancha
