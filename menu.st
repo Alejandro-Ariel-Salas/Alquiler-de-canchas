@@ -46,13 +46,13 @@ club agregarUsuario: usuario.
 
 "Crear reservas"
 fecha := Date newDay: 19 monthNumber: 5 year: 2025.
-reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 8 horaFin: 9 usuario: (usuario verNroUsuario) cancha: (club verTodasLasCanchas at: 1).
+reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 8 horaFin: 9 usuario: (usuario verNroUsuario) cancha:  1.
 club agregarReserva: reserva.
 fecha := Date newDay: 20 monthNumber: 5 year: 2025.
-reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 12 horaFin: 13 usuario: (usuario verNroUsuario) cancha: (club verTodasLasCanchas at: 1).
+reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 12 horaFin: 13 usuario: (usuario verNroUsuario) cancha: 1.
 club agregarReserva: reserva.
 fecha := Date newDay: 20 monthNumber: 5 year: 2025.
-reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 12 horaFin: 13 usuario: (usuario verNroUsuario) cancha: (club verTodasLasCanchas at: 2).
+reserva := Reserva crearReservaId: (club cantidadReservas + 1) fecha: fecha horaInicio: 12 horaFin: 13 usuario: (usuario verNroUsuario) cancha:  2.
 club agregarReserva: reserva.
 
 fecha:= Date newDay: 3 monthNumber: 6 year: 2025.
@@ -360,7 +360,7 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 				].
 
 
-			cancha := Cancha crearCanchaid: club cantidadCanchas nom: nomCancha tam: tam tip: tipo.
+			cancha := Cancha crearCanchaid: (club cantidadCanchas) + 1 nom: nomCancha tam: tam tip: tipo.
 			club agregarCancha: cancha.
 		].
 		"crear usuario"
@@ -589,6 +589,7 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 			].
 			MessageBox notify: 'Haga click en aceptar para dejar de ver' caption: 'Datos impresos'.
 		].
+
 		"mostrar reservas por dia"
 		(opc = 8) ifTrue: [						
 			dia := (Prompter prompt: 'Ingrese el día de la reserva:') asNumber.
@@ -605,7 +606,7 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 
 			reservasTot isEmpty
 			    ifTrue: [Transcript show: 'No hay reservas para esa fecha.'; cr]
-			    ifFalse: [reservasTot do: [:r | Transcript show: (r printReserva: (club buscarUsuario:(r verUsuario))) ; cr]].
+			    ifFalse: [reservasTot do: [:r | Transcript show: (r printReserva: club) ; cr]].
 			MessageBox notify: 'Haga click en aceptar para dejar de ver' caption: 'Datos impresos'.
 		].
 		"mostrar cantidad de reservas por usuario"
@@ -622,7 +623,7 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 
 			usuarios do: [:u | 
 			reservasPorUsuario := reservas select: [:r | r verUsuario = u verNroUsuario ].
-			Transcript show: u printString, ' - Cantidad de reservas: ', reservasPorUsuario size printString; cr.
+			Transcript show: (u verNombre) , ' ' , (u verApellido ),' (', (u verNroUsuario) printString , ') - Cantidad de reservas: ', reservasPorUsuario size printString; cr.
 
 			].
 			MessageBox notify: 'Haga click en aceptar para dejar de ver' caption: 'Datos impresos'.
@@ -638,7 +639,7 @@ opc:= (Prompter prompt: ' Ingrese una opcion:') asNumber.
 			canchas do: [:c |
 			    cantidad := 0.
 			    reservas do: [:r |
-				(r verCancha = c) ifTrue: [cantidad := cantidad + 1].
+				(r verCancha = c verId ) ifTrue: [cantidad := cantidad + 1].
 			    ].
 			    Transcript show: 'Cancha ', c verId printString, ' (', c verNomb, '): ', cantidad printString, ' reservas.'; cr.
 			].
