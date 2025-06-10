@@ -74,6 +74,9 @@ reservasDia: unaFecha
 reservas := self verTodasLasReservas.
 ^reservas select: [:reserva | reserva verFecha = unaFecha ].!
 
+verCanchasAbiertasDia: unDia
+^ (self) verTodasLasCanchas select: [:cancha | cancha tieneDiaBool: unDia ] .!
+
 verDir
 ^direccion.!
 
@@ -121,6 +124,7 @@ verTodosLosUsuarios
 !Club categoriesFor: #modiNom:!public! !
 !Club categoriesFor: #modiTel:!public! !
 !Club categoriesFor: #reservasDia:!public! !
+!Club categoriesFor: #verCanchasAbiertasDia:!public! !
 !Club categoriesFor: #verDir!public! !
 !Club categoriesFor: #verEmail!public! !
 !Club categoriesFor: #verNom!public! !
